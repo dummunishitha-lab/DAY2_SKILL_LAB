@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TaskForge | Student Task Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="proj.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- SIDEBAR: brand, profile, filters, categories, tools -->
+  <aside class="side">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="7"/><path d="M20 3v8M20 29v8M3 20h8M29 20h8M8 8l5.6 5.6M26.4 26.4L32 32M32 8l-5.6 5.6M13.6 26.4L8 32"/></svg>
+      <div><b>TaskForge</b><small>Student task manager</small></div>
+    </div>
+
+    <div class="profile">
+      <div class="avatar" id="avatar">S</div>
+      <input id="userName" value="Student" maxlength="18" aria-label="Your name">
+    </div>
+
+    <nav>
+      <h2>Status</h2>
+      <button class="nav active" data-filter="all">All tasks <span class="count" id="cAll">0</span></button>
+      <button class="nav" data-filter="pending">Pending <span class="count" id="cPending">0</span></button>
+      <button class="nav" data-filter="completed">Completed <span class="count" id="cDone">0</span></button>
+      <h2>Subject</h2>
+      <div id="catNav"></div>
+    </nav>
+
+    <blockquote id="quote" class="quote"></blockquote>
+
+    <div class="side-foot">
+      <button id="themeBtn" class="ghost">Switch to drafting paper</button>
+      <button id="clearDone" class="ghost danger">Clear completed</button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+    <header class="titleblock">
+      <div>
+        <h1>Task control</h1>
+        <p id="status"></p>
+      </div>
+      <div class="cells">
+        <div><small>Date</small><b id="date"></b></div>
+        <div><small>Time</small><b id="clock"></b></div>
+      </div>
+    </header>
+
+    <section class="stats" aria-label="Statistics">
+      <div class="gauge panel">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <circle class="trk" cx="50" cy="50" r="44"/>
+          <circle class="bar" id="ring" cx="50" cy="50" r="44" transform="rotate(-90 50 50)"/>
+          <text id="pct" x="50" y="57" text-anchor="middle">0%</text>
+        </svg>
+        <span>Completion</span>
+      </div>
+      <div class="stat panel"><b id="sTotal">0</b><span>Total tasks</span></div>
+      <div class="stat panel s-pend"><b id="sPending">0</b><span>In progress</span></div>
+      <div class="stat panel s-done"><b id="sDone">0</b><span>Verified</span></div>
+      <div class="stat panel s-late"><b id="sLate">0</b><span>Overdue</span></div>
+    </section>
+
+    <form id="taskForm" class="panel form" novalidate>
+      <input id="title" placeholder="What needs to be built, solved or submitted?" maxlength="80" autocomplete="off" aria-label="Task name">
+      <select id="category" aria-label="Subject"></select>
+      <select id="priority" aria-label="Priority">
+        <option value="low">Low priority</option>
+        <option value="medium" selected>Medium priority</option>
+        <option value="high">High priority</option>
+      </select>
+      <input id="due" type="date" aria-label="Due date">
+      <button type="submit" id="saveBtn" class="primary">Add task</button>
+      <button type="button" id="cancelBtn" class="ghost" hidden>Cancel</button>
+      <p id="formError" class="error" role="alert"></p>
+    </form>
+
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="Search tasks   ( press / )" aria-label="Search tasks">
+      <select id="sort" aria-label="Sort tasks">
+        <option value="newest">Newest first</option>
+        <option value="due">Nearest due date</option>
+        <option value="priority">Highest priority</option>
+      </select>
+      <span id="shown" class="shown"></span>
+    </div>
+
+    <ul id="taskList" class="list"></ul>
+    <div id="empty" class="empty" hidden></div>
+  </main>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="proj.js"></script>
+</body>
+</html>
